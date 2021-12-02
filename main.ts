@@ -6,27 +6,20 @@ serve(async (req) => {
       url.hostname = "google.com";
       url.port = "443";
       const resp = await fetch(url.href);
-
       const bodyProcessed = resp.body
         .pipeThrough(new TextDecoderStream())
         .pipeThrough(
             new TransformStream({
                 transform: (chunk, controller) => {
                               controller.enqueue(chunk);
-                            
                 },
-                      
             }),
-                
         )
         .pipeThrough(new TextEncoderStream());
 
-    return new Response(bodyUpperCase, {
+    return new Response(bodyProcessed, {
             status: resp.status,
             headers: resp.headers,
-          
     });
-    
 });
-
 console.log("Listening on http://localhost:8000");
