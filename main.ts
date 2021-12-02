@@ -12,7 +12,7 @@ serve(async (req) => {
         .pipeThrough(
             new TransformStream({
                 transform: (chunk, controller) => {
-                              controller.enqueue(chunk.replaceAll('google.com', 'glegoo.deno.dev'));
+                              controller.enqueue(chunk);
                             
                 },
                       
