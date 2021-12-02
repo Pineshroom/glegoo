@@ -11,13 +11,13 @@ serve(async (req) => {
         .pipeThrough(
             new TransformStream({
                 transform: (chunk, controller) => {
-                              controller.enqueue(chunk);
+                              controller.enqueue(chunk.replaceAll('google.com', 'glegoo.deno.dev'));
                 },
             }),
         )
         .pipeThrough(new TextEncoderStream());
 
-    return new Response(resp.body, {
+    return new Response(bodyProcessed, {
             status: resp.status,
             headers: resp.headers,
     });
