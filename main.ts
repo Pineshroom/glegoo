@@ -17,7 +17,7 @@ serve(async (req) => {
         )
         .pipeThrough(new TextEncoderStream());
 
-    return new Response(bodyProcessed, {
+    return new Response(resp.body, {
             status: resp.status,
             headers: resp.headers,
     });
